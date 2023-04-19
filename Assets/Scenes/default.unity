@@ -38578,6 +38578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a4cff1c0df7fc4b9c119c42273b2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 629709408109648515, guid: f53f1afd3b58c574f8c71c2d16218ecd, type: 3}
   playerMaxSpeed: 200
 --- !u!114 &1861326228
 MonoBehaviour:

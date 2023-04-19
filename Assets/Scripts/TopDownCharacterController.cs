@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class TopDownCharacterController : MonoBehaviour
 {
+    public GameObject projectile;
+
     //Reference to attached animator
     private Animator animator;
 
@@ -52,6 +54,8 @@ public class TopDownCharacterController : MonoBehaviour
 
         //Otherwise:
         Debug.Log($"Shoot! {Time.time}", gameObject);
+        GameObject bullet = Instantiate<GameObject>(projectile, transform);
+        bullet.GetComponent<Projectile>().SetDirection(playerDirection);
     }
 
     /// <summary>
