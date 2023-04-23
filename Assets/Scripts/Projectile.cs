@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
         direction = newDirection;
     }
 
-    private void OnTriggerEnter2D(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if ((other.CompareTag("Player") && !playerProjectile) || (other.CompareTag("Enemy") && playerProjectile))
         {

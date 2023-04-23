@@ -19,7 +19,15 @@ public class TopDownCharacterController : MonoBehaviour
     //The speed at which they're moving
     private float playerSpeed = 1f;
 
+    public enum WeaponType
+    {
+        Pistol,
+        Shotgun,
+        Rifle,
+        SMG
+    }
 
+    public WeaponType type;
     [Header("Movement parameters")]
 
     //The maximum speed the player can move
@@ -94,5 +102,10 @@ public class TopDownCharacterController : MonoBehaviour
 
         //And set the speed to 1, so they move!
         playerSpeed = 1f;
+    }
+
+    public void SetWeapontype()
+    {
+
     }
 }
