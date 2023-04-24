@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class TopDownCharacterController : MonoBehaviour
 {
-    public GameObject projectile;
 
     //Reference to attached animator
     private Animator animator;
@@ -14,20 +13,11 @@ public class TopDownCharacterController : MonoBehaviour
     private Rigidbody2D rb;
 
     //The direction the player is moving in
-    private Vector2 playerDirection;
+    public Vector2 playerDirection;
 
     //The speed at which they're moving
     private float playerSpeed = 1f;
 
-    public enum WeaponType
-    {
-        Pistol,
-        Shotgun,
-        Rifle,
-        SMG
-    }
-
-    public WeaponType type;
     [Header("Movement parameters")]
 
     //The maximum speed the player can move
@@ -62,8 +52,7 @@ public class TopDownCharacterController : MonoBehaviour
 
         //Otherwise:
         Debug.Log($"Shoot! {Time.time}", gameObject);
-        GameObject bullet = Instantiate<GameObject>(projectile, transform);
-        bullet.GetComponent<Projectile>().SetDirection(playerDirection);
+        gameObject.GetComponent<Gun>().Shoot();
     }
 
     /// <summary>
@@ -104,8 +93,4 @@ public class TopDownCharacterController : MonoBehaviour
         playerSpeed = 1f;
     }
 
-    public void SetWeapontype()
-    {
-
-    }
 }

@@ -6,15 +6,7 @@ using UnityEngine;
 public class WeaponPickup : MonoBehaviour
 {
 
-    public enum WeaponType
-    {
-        Pistol,
-        Shotgun,
-        Rifle,
-        SMG
-    }
-
-    public WeaponType type;
+    public Gun.WeaponType type;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +24,7 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<TopDownCharacterController>().
+            other.GetComponent<Gun>().SetType(type);
         }
     }
 
