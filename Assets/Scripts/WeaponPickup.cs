@@ -24,7 +24,10 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Gun>().SetType(type);
+            gameObject.GetComponentInChildren<Gun>().SetType(type);
+            transform.SetParent(other.transform, true);
+            other.GetComponent<TopDownCharacterController>().SetGun(gameObject);
+            Destroy(this);
         }
     }
 

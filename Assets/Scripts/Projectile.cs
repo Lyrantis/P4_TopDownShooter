@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public Vector2 direction;
     public bool explosive;
     public float explosionRadius;
-    public bool playerProjectile;
+    private bool playerProjectile = false;
 
     Rigidbody2D rb;
 
@@ -29,6 +29,11 @@ public class Projectile : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection;
+    }
+
+    public void SetPlayerProjectile(bool isPlayerProjectile)
+    {
+        playerProjectile = isPlayerProjectile;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

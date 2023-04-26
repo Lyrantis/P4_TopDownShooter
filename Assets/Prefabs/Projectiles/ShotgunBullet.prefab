@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3870084516994528227}
   - component: {fileID: 4474972457319494203}
   m_Layer: 0
-  m_Name: PlayerBullet
+  m_Name: ShotgunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,12 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a04369403f30284eaa230d3ccf7101f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 5
   speed: 40
   direction: {x: 1, y: 0}
   explosive: 0
   explosionRadius: 0
-  playerProjectile: 1
 --- !u!212 &6159660511454131442
 SpriteRenderer:
   m_ObjectHideFlags: 0
