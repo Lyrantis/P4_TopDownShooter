@@ -38878,6 +38878,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileToFire: {fileID: 629709408109648515, guid: f53f1afd3b58c574f8c71c2d16218ecd, type: 3}
-  maxSpreadAngle: 0
+  maxSpreadAngle: 10
   StartingType: 0
   level: 1

@@ -69,44 +69,54 @@ public class Gun : MonoBehaviour
         if (currentShotDelay == 0.0f)
         {
             Debug.Log(currentAmmoLoaded);
+            
             if (currentAmmoLoaded > 0)
             {
-                Vector3 MousePos = Mouse.current.position.ReadValue();
-                MousePos.z = Camera.main.nearClipPlane;
-
-                MousePos = Camera.main.ScreenToWorldPoint(MousePos);
-
-                Vector2 distance = new Vector2(MousePos.x - gameObject.transform.position.x, MousePos.y - gameObject.transform.position.y);
-                float linearDistance = distance.magnitude;
-                float maxOffset = Mathf.Tan(maxSpreadAngle) * linearDistance;
-                float offset = Random.Range(-maxOffset, maxOffset);
-
-                float xRatio;
-                float yRatio;
-
-                if (distance.x == 0)
+                for (int i = 0; i < projectileCount; i++)
                 {
-                    xRatio = 0;
-                    yRatio = 1;
-                }
-                else if (distance.y == 0)
-                {
-                    xRatio = 1;
-                    yRatio = 0;
-                }
-                else
-                {
-                    xRatio = distance.x / distance.y;
-                    yRatio = 1 - xRatio;
-                }
-                Vector2 ratio = new Vector2(xRatio, yRatio);
-                ratio.Normalize();
+                    Vector3 MousePos = Mouse.current.position.ReadValue();
+                    MousePos.z = Camera.main.nearClipPlane;
 
-                Vector2 target = new Vector2(MousePos.x * (offset * ratio.x), MousePos.y + (offset * ratio.y));
-                distance = new Vector2(target.x - gameObject.transform.position.x, target.y - gameObject.transform.position.y);
+                    MousePos = Camera.main.ScreenToWorldPoint(MousePos);
 
-                GameObject bullet = Instantiate(projectileToFire, transform);
-                bullet.GetComponent<Projectile>().SetDirection(distance.normalized);
+                    Vector2 distance = new Vector2(MousePos.x - gameObject.transform.position.x, MousePos.y - gameObject.transform.position.y);
+                    float angleRad = maxSpreadAngle * Mathf.Deg2Rad;
+                    float angleToAdjust = Random.Range(-angleRad, angleRad);
+                    Vector2 rotatedDirection = new Vector2(distance.x * Mathf.Cos(angleToAdjust) - distance.y * Mathf.Sin(angleToAdjust), distance.x * Mathf.Sin(angleToAdjust) + distance.y * Mathf.Cos(angleToAdjust));
+                    rotatedDirection.Normalize();
+                    //float linearDistance = distance.magnitude;
+                    //float maxOffset = Mathf.Tan(maxSpreadAngle) * linearDistance;
+                    //float offset = Random.Range(-maxOffset, maxOffset);
+
+                    //float xRatio;
+                    //float yRatio;
+
+                    //if (distance.x == 0)
+                    //{
+                    //    xRatio = 0;
+                    //    yRatio = 1;
+                    //}
+                    //else if (distance.y == 0)
+                    //{
+                    //    xRatio = 1;
+                    //    yRatio = 0;
+                    //}
+                    //else
+                    //{
+                    //    xRatio = Mathf.Abs(distance.x) / Mathf.Abs(distance.y);
+                    //    yRatio = 1 - xRatio;
+                    //}
+                    //Vector2 ratio = new Vector2(xRatio, yRatio);
+                    //ratio.Normalize();
+
+                    //Vector2 target = new Vector2(MousePos.x + (offset * ratio.x), MousePos.y + (offset * ratio.y));
+                    //distance = new Vector2(target.x - gameObject.transform.position.x, target.y - gameObject.transform.position.y);
+
+                    GameObject bullet = Instantiate(projectileToFire, transform);
+                    
+                    bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
+                }
+                
                 currentAmmoLoaded -= 1;
             }
             else
@@ -131,7 +141,7 @@ public class Gun : MonoBehaviour
 
                     maxAmmo = 144;
                     maxAmmoLoaded = 12;
-                    projectileCount = 1;
+                    projectileCount = 10;
                     shotDelay = 0.5f;
                     break;
 
