@@ -7,6 +7,8 @@ public class Gun : MonoBehaviour
 {
     private float shotDelay;
     private float currentShotDelay = 0.0f;
+    public float reloadTime;
+    private float currentReloadTime;
     private int projectileCount;
     private Vector2 direction;
     private int ammoCount;
@@ -17,7 +19,8 @@ public class Gun : MonoBehaviour
     public GameObject firePoint;
     public float maxSpreadAngle;
     private bool autofire = false;
-    private bool isFiring = false;
+    public bool isFiring = false;
+    private bool isReloading = false;
 
     public enum WeaponType
     {
@@ -40,7 +43,18 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentShotDelay > 0.0f)
+        if (isReloading)
+        {
+            currentReloadTime -= Time.deltaTime;
+
+            if (currentReloadTime <= 0.0f)
+            {
+                currentReloadTime = reloadTime;
+                isReloading = false;
+                Reload();
+            }
+        }
+        if (currentShotDelay > 0)
         {
             currentShotDelay -= Time.deltaTime;
 
@@ -48,6 +62,11 @@ public class Gun : MonoBehaviour
             {
                 currentShotDelay = 0.0f;
             }
+        }
+
+        if (isFiring && !isReloading && currentShotDelay == 0.0f)
+        {
+            Shoot();
         }
     }
 
@@ -98,17 +117,11 @@ public class Gun : MonoBehaviour
             }
             else
             {
-                Reload();
+                isReloading = true;
             }
 
             currentShotDelay = shotDelay;
 
-            Debug.Log(type);
-            if (autofire)
-            {
-                Debug.Log("WHAT");
-                StartCoroutine(AutoFire(shotDelay));
-            }
         }
     }
 
@@ -117,45 +130,6 @@ public class Gun : MonoBehaviour
         StopAllCoroutines();
         currentShotDelay = shotDelay;
         isFiring = false;
-    }
-
-    IEnumerator AutoFire(float timeBetweenShots)
-    {
-        Debug.Log("FIRING");
-        isFiring = true;
-        yield return new WaitForSeconds(timeBetweenShots);
-
-        if (currentAmmoLoaded > 0)
-        {
-            for (int i = 0; i < projectileCount; i++)
-            {
-                Vector3 MousePos = Mouse.current.position.ReadValue();
-                MousePos.z = Camera.main.nearClipPlane;
-
-                MousePos = Camera.main.ScreenToWorldPoint(MousePos);
-
-                Vector2 distance = new Vector2(MousePos.x - gameObject.transform.position.x, MousePos.y - gameObject.transform.position.y);
-                float angleRad = maxSpreadAngle * Mathf.Deg2Rad;
-                float angleToAdjust = Random.Range(-angleRad, angleRad);
-                Vector2 rotatedDirection = new Vector2(distance.x * Mathf.Cos(angleToAdjust) - distance.y * Mathf.Sin(angleToAdjust), distance.x * Mathf.Sin(angleToAdjust) + distance.y * Mathf.Cos(angleToAdjust));
-                rotatedDirection.Normalize();
-
-                GameObject bullet = Instantiate(projectile, firePoint.transform);
-
-                bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
-                bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
-                bullet.transform.SetParent(null);
-            }
-
-            currentAmmoLoaded -= 1;
-        }
-        else
-        {
-            Reload();
-        }
-
-        AutoFire(timeBetweenShots);
-
     }
 
     public void SetType(WeaponType gunType)
@@ -170,6 +144,7 @@ public class Gun : MonoBehaviour
                 shotDelay = 0.5f;
                 maxSpreadAngle = 3.0f;
                 autofire = false;
+                reloadTime = 2.0f;
                 break;
 
             case WeaponType.Shotgun:
@@ -180,6 +155,7 @@ public class Gun : MonoBehaviour
                 shotDelay = 1.5f;
                 maxSpreadAngle = 5.0f;
                 autofire = false;
+                reloadTime = 5.0f;
                 break;
 
             case WeaponType.AssaultRifle:
@@ -190,7 +166,7 @@ public class Gun : MonoBehaviour
                 shotDelay = 0.1f;
                 maxSpreadAngle = 6.0f;
                 autofire = true;
-                Debug.Log("Autofire has been set");
+                reloadTime = 3.0f;
                 break;
 
             default:
@@ -200,6 +176,7 @@ public class Gun : MonoBehaviour
         currentAmmoLoaded = maxAmmoLoaded;
         ammoCount = maxAmmo;
         currentShotDelay = 0;
+        currentReloadTime = reloadTime;
     }
 
     public void SetLevel(int newLevel)
