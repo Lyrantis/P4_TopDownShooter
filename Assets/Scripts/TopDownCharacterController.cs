@@ -59,6 +59,7 @@ public class TopDownCharacterController : MonoBehaviour
             {
                 gun.transform.localPosition = new Vector2(0.0f, -0.75f);
                 gun.transform.rotation = Quaternion.AngleAxis(-90.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = true;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) >= 112.5f) // bottom left
@@ -68,6 +69,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(-0.6f, -0.75f);
+                gun.transform.rotation = Quaternion.AngleAxis(-135.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = true;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) >= 67.5f) // left
@@ -76,6 +79,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(-0.6f, -0.0f);
+                gun.transform.rotation = Quaternion.AngleAxis(180.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = true;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) >= 22.5f) // top left
@@ -84,6 +89,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(-0.6f, 0.75f);
+                gun.transform.rotation = Quaternion.AngleAxis(135.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = true;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) >= 0.0f) // top
@@ -92,6 +99,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(0.0f, 0.75f);
+                gun.transform.rotation = Quaternion.AngleAxis(90.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = false;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) <= -157.5f) // bottom 
@@ -101,6 +110,7 @@ public class TopDownCharacterController : MonoBehaviour
             {
                 gun.transform.localPosition = new Vector2(0.0f, -0.75f);
                 gun.transform.rotation = Quaternion.AngleAxis(-90.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = false;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) <= -112.5f) // bottom right
@@ -109,6 +119,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(0.6f, -0.75f);
+                gun.transform.rotation = Quaternion.AngleAxis(-45.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = false;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) <= -67.5f) // right
@@ -117,6 +129,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(0.6f, 0.0f);
+                gun.transform.rotation = Quaternion.AngleAxis(0.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = false;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) <= -22.5f) // top right
@@ -125,6 +139,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(0.6f, 0.75f);
+                gun.transform.rotation = Quaternion.AngleAxis(45.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = false;
             }
         }
         else if (Vector2.SignedAngle(Vector2.up, distance) <= 0.0f) // top
@@ -133,6 +149,8 @@ public class TopDownCharacterController : MonoBehaviour
             if (gun != null)
             {
                 gun.transform.localPosition = new Vector2(0.0f, 0.75f);
+                gun.transform.rotation = Quaternion.AngleAxis(90.0f, Vector3.forward);
+                gun.GetComponent<SpriteRenderer>().flipY = true;
             }
         }
 
@@ -145,7 +163,17 @@ public class TopDownCharacterController : MonoBehaviour
     {
         //Not performed? Don't run any other code
         if (!context.performed)
+        {
+            if (gun != null)
+            {
+                if (gun.GetComponent<Gun>().GetIsFiring())
+                {
+                    gun.GetComponent<Gun>().StopShooting();
+                }
+
+            }
             return;
+        }
 
         //Otherwise:
         gameObject.GetComponentInChildren<Gun>().Shoot();
