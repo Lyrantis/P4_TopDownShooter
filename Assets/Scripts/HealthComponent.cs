@@ -17,11 +17,11 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            //Die
+            Die();
         }
     }
 
@@ -33,5 +33,11 @@ public class HealthComponent : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+        Destroy(this);
     }
 }

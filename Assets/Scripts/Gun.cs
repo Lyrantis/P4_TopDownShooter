@@ -155,7 +155,7 @@ public class Gun : MonoBehaviour
                 shotDelay = 1.5f;
                 maxSpreadAngle = 5.0f;
                 autofire = false;
-                reloadTime = 5.0f;
+                reloadTime = 3.0f;
                 break;
 
             case WeaponType.AssaultRifle:
@@ -164,7 +164,7 @@ public class Gun : MonoBehaviour
                 maxAmmoLoaded = 30;
                 projectileCount = 1;
                 shotDelay = 0.1f;
-                maxSpreadAngle = 6.0f;
+                maxSpreadAngle = 4.0f;
                 autofire = true;
                 reloadTime = 3.0f;
                 break;

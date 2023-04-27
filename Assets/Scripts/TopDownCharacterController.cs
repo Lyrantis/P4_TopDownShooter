@@ -166,14 +166,18 @@ public class TopDownCharacterController : MonoBehaviour
         {
             if (gun != null)
             {
-                gameObject.GetComponentInChildren<Gun>().isFiring = false;
+                gun.GetComponent<Gun>().isFiring = false;
 
             }
             return;
         }
 
         //Otherwise:
-        gameObject.GetComponentInChildren<Gun>().isFiring = true;
+        if (gun != null)
+        {
+            gun.GetComponent<Gun>().isFiring = true;
+        }
+       
     }
 
     /// <summary>

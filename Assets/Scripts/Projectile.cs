@@ -23,12 +23,13 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(direction * speed);
+        rb.velocity = direction * speed;
     }
 
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection;
+        
     }
 
     public void SetPlayerProjectile(bool isPlayerProjectile)
@@ -36,13 +37,19 @@ public class Projectile : MonoBehaviour
         playerProjectile = isPlayerProjectile;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if ((other.CompareTag("Player") && !playerProjectile) || (other.CompareTag("Enemy") && playerProjectile))
+        if ((other.gameObject.CompareTag("Player") && !playerProjectile) || (other.gameObject.CompareTag("Enemy") && playerProjectile))
         {
-            other.GetComponent<HealthComponent>().TakeDamage(damage);
+            other.gameObject.GetComponent<HealthComponent>().TakeDamage(damage);
+            Destroy(gameObject);
+            Destroy(this);
         }
-        
+        else if (other.gameObject.CompareTag("Level"))
+        {
+            Destroy(gameObject);
+            Destroy(this);
+        }
     }
 
     private void OnBecameInvisible()
