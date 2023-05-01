@@ -20,7 +20,7 @@ public class AmmoPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Gun>().RefillAmmo();
+            collision.GetComponentInChildren<Gun>().RefillAmmo();
             Destroy(gameObject);
             Destroy(this);
         }

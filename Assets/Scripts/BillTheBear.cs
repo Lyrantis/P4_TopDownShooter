@@ -31,8 +31,8 @@ public class BillTheBear : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).magnitude;
-        Debug.Log(distanceToPlayer);
-        if (distanceToPlayer < aggroDistance)
+
+        if (distanceToPlayer < aggroDistance || GetComponent<HealthComponent>().GetHealth() < GetComponent<HealthComponent>().maxHealth)
         {
             aggro = true;
             moving = true;
