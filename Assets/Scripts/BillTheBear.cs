@@ -10,10 +10,11 @@ public class BillTheBear : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] GameObject attackBox;
 
-    public float aggroDistance = 3.0f;
+    public float aggroDistance = 10.0f;
     private bool aggro = false;
     private bool moving = false;
     private float attackBoxOffset;
+    private float attackRange = 3.0f;
 
     private Animator anim;
 
@@ -30,6 +31,7 @@ public class BillTheBear : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).magnitude;
+        Debug.Log(distanceToPlayer);
         if (distanceToPlayer < aggroDistance)
         {
             aggro = true;
@@ -50,21 +52,19 @@ public class BillTheBear : MonoBehaviour
                 attackBox.transform.localPosition = new Vector2(attackBoxOffset, 0); 
             }
 
+            if (distanceToPlayer <= attackRange)
+            {
+                attackBox.SetActive(true);
+                moving = false;
+                anim.SetBool("Attacking", true);
+                StartCoroutine(StopAttack(1.0f));
+                
+            }
+
             agent.SetDestination(target.position);
         }
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            attackBox.SetActive(true);
-            moving = false;
-            anim.SetBool("Attacking", true);
-            StartCoroutine(StopAttack(1.0f));
-        }
     }
 
     IEnumerator StopAttack(float timeToAttack)

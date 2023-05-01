@@ -188,4 +188,10 @@ public class Gun : MonoBehaviour
     {
         return isFiring;
     }
+
+    public void RefillAmmo()
+    {
+        ammoCount = maxAmmo;
+        currentAmmoLoaded = maxAmmoLoaded;
+    }
 }
