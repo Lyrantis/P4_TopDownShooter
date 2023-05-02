@@ -8,7 +8,7 @@ public class TopDownCharacterController : MonoBehaviour
 
     //Reference to attached animator
     private Animator animator;
-
+ 
     //Reference to attached rigidbody 2D
     private Rigidbody2D rb;
     private GameObject gun = null;
@@ -24,6 +24,7 @@ public class TopDownCharacterController : MonoBehaviour
 
     //The maximum speed the player can move
     [SerializeField] private float playerMaxSpeed = 100.0f;
+    public bool hasKey = false;
 
     
     /// <summary>
