@@ -30,9 +30,9 @@ public class Lock : MonoBehaviour
     {
         yield return new WaitForSeconds(animationTime);
 
-        Destroy(GetComponentInParent<Collider2D>());
-        Destroy(gameObject);
-        Destroy(this);
+        Destroy(GetComponentInParent<BoxCollider2D>());
+        //Destroy(gameObject);
+        //Destroy(this);
     }
 
 }
