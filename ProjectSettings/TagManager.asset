@@ -8,6 +8,8 @@ TagManager:
   - Level
   - PlayerProjectile
   - EnemyProjectile
+  - Projectile
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Enemy
   - Player Projectile
   - Enemy Projectile
-  - 
+  - Water
   - 
   - 
   - 
