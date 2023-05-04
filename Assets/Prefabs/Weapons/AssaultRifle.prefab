@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541450651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.93, y: 0.41, z: 0}
+  m_LocalPosition: {x: 0.554, y: 0.087, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60,12 +60,12 @@ Transform:
   m_GameObject: {fileID: 387698624676750611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1541450652}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9090117044972354184
 MonoBehaviour:
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68251b2cc3ad1ba4aad743398dfe4d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 3
 --- !u!212 &2882202572188313830
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: b04d363014d0cae49a534aef328f21e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b72d06dd18f151b4ebb7c806e0907030, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,18 +145,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000077039, y: 0.0031625032}
+  m_Offset: {x: 0.00007724762, y: 0.010486484}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.8, y: 1.28}
+    oldSize: {x: 1.28, y: 0.59}
     newSize: {x: 1.8, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8052962, y: 1.3147633}
+  m_Size: {x: 1.1616173, y: 0.46016908}
   m_EdgeRadius: 0
 --- !u!114 &1981979665
 MonoBehaviour:
@@ -170,7 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779202c44906b674d8f03bdf056aca05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 629709408109648515, guid: f53f1afd3b58c574f8c71c2d16218ecd, type: 3}
-  maxSpreadAngle: 3
-  type: 1
+  reloadTime: 0
+  projectile: {fileID: 629709408109648515, guid: 36eb8fb6ec7992545a8ecdadf9ad7500, type: 3}
+  firePoint: {fileID: 1541450651}
+  maxSpreadAngle: 6
+  isFiring: 0
+  type: 3
   level: 1

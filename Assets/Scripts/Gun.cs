@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,13 @@ using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
+    public enum BulletEffects
+    {
+        None,
+        Fire,
+        Slowing
+    }
+
     private float shotDelay;
     private float currentShotDelay = 0.0f;
     public float reloadTime;
@@ -21,6 +29,7 @@ public class Gun : MonoBehaviour
     private bool autofire = false;
     public bool isFiring = false;
     private bool isReloading = false;
+    public BulletEffects bulletEffect;
 
     public enum WeaponType
     {
@@ -193,5 +202,31 @@ public class Gun : MonoBehaviour
     {
         ammoCount = maxAmmo;
         currentAmmoLoaded = maxAmmoLoaded;
+    }
+
+    public void PickupPistolUpgrade(WeaponUpgrade.PistolUpgrades upgradeType)
+    {
+        if (upgradeType == WeaponUpgrade.PistolUpgrades.FireDamage)
+        {
+            bulletEffect = BulletEffects.Fire;
+        }
+        else if (upgradeType == WeaponUpgrade.PistolUpgrades.Akimbo)
+        {
+            //Akimbo
+        }
+        else if (upgradeType == WeaponUpgrade.PistolUpgrades.StatBoost)
+        {
+
+        }
+    }
+
+    public void PickupAssaultRifleUpgrade(WeaponUpgrade.AssaultRifleUpgrades upgradeTypee)
+    {
+
+    }
+
+    public void PickupShotgunUpgrade(WeaponUpgrade.ShotgunUpgrades upgradeType)
+    {
+
     }
 }
