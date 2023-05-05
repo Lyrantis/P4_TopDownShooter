@@ -13,10 +13,16 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] Image healthBarBackground;
     public bool hasHealthBar = true;
     private float healthBarLifeTime = 2.0f;
+    private Projectile.projectileEffects status = Projectile.projectileEffects.None;
+    public float effectTime = 5.0f;
+    private float currentEffectTime;
+    private float timeBetweenDamage = 0.5f;
+    private float remainingTimeBetweenDamage = 0.5f;
 
     void Start()
     {
         currentHealth = maxHealth;
+        currentEffectTime = 0.0f;
 
         if (hasHealthBar)
         {
@@ -24,6 +30,21 @@ public class HealthComponent : MonoBehaviour
             healthBarFill.enabled = false;
         }
         
+    }
+
+    public void Update()
+    {
+        if (status == Projectile.projectileEffects.Fire)
+        {
+            currentEffectTime -= Time.deltaTime;
+            remainingTimeBetweenDamage -= Time.deltaTime;
+
+            if (remainingTimeBetweenDamage <= 0)
+            {
+                TakeDamage(2);
+                remainingTimeBetweenDamage = timeBetweenDamage;
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -83,5 +104,11 @@ public class HealthComponent : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    public void ApplyEffect(Projectile.projectileEffects effect)
+    {
+        status = effect;
+        currentEffectTime = effectTime;
     }
 }

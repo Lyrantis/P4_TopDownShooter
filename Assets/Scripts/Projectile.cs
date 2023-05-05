@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public enum projectileEffects
+    {
+        None,
+        Fire,
+        Slow
+    }
 
     public int damage;
     public float speed;
@@ -12,6 +18,7 @@ public class Projectile : MonoBehaviour
     public bool explosive;
     public float explosionRadius;
     private bool playerProjectile = false;
+    public projectileEffects effect = projectileEffects.None;
 
     private Vector2 startPos;
 
@@ -42,6 +49,21 @@ public class Projectile : MonoBehaviour
         
     }
 
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
+    }
+
+    public void MultiplyDamage(float multiplier)
+    {
+        damage = (int)(multiplier * damage);
+    }
+
+    public void SetRange(float newRange)
+    {
+        range = newRange;
+    }
+
     public void SetPlayerProjectile(bool isPlayerProjectile)
     {
         playerProjectile = isPlayerProjectile;
@@ -52,6 +74,11 @@ public class Projectile : MonoBehaviour
         if ((other.gameObject.CompareTag("Player") && !playerProjectile) || (other.gameObject.CompareTag("Enemy") && playerProjectile))
         {
             other.gameObject.GetComponent<HealthComponent>().TakeDamage(damage);
+            if (effect != projectileEffects.None)
+            {
+                other.gameObject.GetComponent<HealthComponent>().ApplyEffect(effect);
+            }
+
             Destroy(gameObject);
             Destroy(this);
         }

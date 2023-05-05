@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
         Slowing
     }
 
+    private float damageMultiplier = 1.0f;
     private float shotDelay;
     private float currentShotDelay = 0.0f;
     public float reloadTime;
@@ -24,12 +25,15 @@ public class Gun : MonoBehaviour
     private int maxAmmoLoaded;
     private int maxAmmo;
     public GameObject projectile;
+    public GameObject alternateProjectile;
     public GameObject firePoint;
     public float maxSpreadAngle;
+    public float range = 10.0f;
     private bool autofire = false;
     public bool isFiring = false;
     private bool isReloading = false;
     public BulletEffects bulletEffect;
+    private bool altFire = false;
 
     public enum WeaponType
     {
@@ -115,10 +119,22 @@ public class Gun : MonoBehaviour
                     Vector2 rotatedDirection = new Vector2(distance.x * Mathf.Cos(angleToAdjust) - distance.y * Mathf.Sin(angleToAdjust), distance.x * Mathf.Sin(angleToAdjust) + distance.y * Mathf.Cos(angleToAdjust));
                     rotatedDirection.Normalize();
 
-                    GameObject bullet = Instantiate(projectile, firePoint.transform);
+                    GameObject bullet;
+
+                    if (altFire)
+                    {
+                        bullet = Instantiate(alternateProjectile, firePoint.transform);
+                    }
+                    else
+                    {
+                        bullet = Instantiate(projectile, firePoint.transform);
+                    }
+                    
                     
                     bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
                     bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
+                    bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
+                    bullet.GetComponent<Projectile>().SetRange(range);
                     bullet.transform.SetParent(null);
                 }
                 
@@ -154,6 +170,7 @@ public class Gun : MonoBehaviour
                 maxSpreadAngle = 3.0f;
                 autofire = false;
                 reloadTime = 2.0f;
+                range = 10.0f;
                 break;
 
             case WeaponType.Shotgun:
@@ -165,6 +182,7 @@ public class Gun : MonoBehaviour
                 maxSpreadAngle = 5.0f;
                 autofire = false;
                 reloadTime = 3.0f;
+                range = 5.0f;
                 break;
 
             case WeaponType.AssaultRifle:
@@ -176,6 +194,7 @@ public class Gun : MonoBehaviour
                 maxSpreadAngle = 4.0f;
                 autofire = true;
                 reloadTime = 3.0f;
+                range = 15.0f;
                 break;
 
             default:
@@ -217,6 +236,42 @@ public class Gun : MonoBehaviour
         else if (upgradeType == WeaponUpgrade.PistolUpgrades.StatBoost)
         {
 
+            maxAmmoLoaded += 3;
+            maxAmmo = maxAmmoLoaded * 12;
+
+            if (shotDelay > 0.2f)
+            {
+                shotDelay -= 0.1f;
+            }
+            
+            if (maxSpreadAngle > 0)
+            {
+                maxSpreadAngle -= 0.5f;
+            }
+            
+            if (reloadTime > 1.0f)
+            {
+                reloadTime -= 0.2f;
+            }
+            
+            damageMultiplier *= 1.2f;
+            range += 5.0f;
+        }
+        else if (upgradeType == WeaponUpgrade.PistolUpgrades.SlowingBullets)
+        {
+            bulletEffect = BulletEffects.Slowing;
+        }
+        else if (upgradeType == WeaponUpgrade.PistolUpgrades.NoReload)
+        {
+            maxAmmoLoaded = maxAmmo;
+            currentAmmoLoaded = ammoCount;
+        }
+        else if (upgradeType == WeaponUpgrade.PistolUpgrades.BigBullets)
+        {
+            //damageMultiplier *= 5.0f;
+            shotDelay = 1.0f;
+            range += 20.0f;
+            altFire = true;
         }
     }
 
