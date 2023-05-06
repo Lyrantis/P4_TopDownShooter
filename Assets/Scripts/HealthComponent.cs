@@ -90,6 +90,7 @@ public class HealthComponent : MonoBehaviour
         healthBarBackground.enabled = true;
         healthBarFill.enabled = true;
 
+        StopAllCoroutines();
         StartCoroutine(HideHealthBar());
     }
 

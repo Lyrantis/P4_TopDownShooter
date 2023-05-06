@@ -13,8 +13,10 @@ public class BillTheBear : MonoBehaviour
     public float aggroDistance = 10.0f;
     private bool aggro = false;
     private bool moving = false;
+    private bool canAttack = true;
     private float attackBoxOffset;
     private float attackRange = 3.0f;
+    public float attackCooldown = 1.0f;
 
     private Animator anim;
 
@@ -52,8 +54,9 @@ public class BillTheBear : MonoBehaviour
                 attackBox.transform.localPosition = new Vector2(attackBoxOffset, 0); 
             }
 
-            if (distanceToPlayer <= attackRange)
+            if (distanceToPlayer <= attackRange && canAttack)
             {
+                canAttack = false;
                 attackBox.SetActive(true);
                 moving = false;
                 anim.SetBool("Attacking", true);
@@ -73,5 +76,14 @@ public class BillTheBear : MonoBehaviour
 
         attackBox.SetActive(false);
         anim.SetBool("Attacking", false);
+        StartCoroutine(AttackCooldown());
+        moving = true;
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+
+        canAttack = true;
     }
 }
