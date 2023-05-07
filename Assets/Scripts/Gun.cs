@@ -223,17 +223,13 @@ public class Gun : MonoBehaviour
         currentAmmoLoaded = maxAmmoLoaded;
     }
 
-    public void PickupPistolUpgrade(WeaponUpgrade.PistolUpgrades upgradeType)
+    public void PickupUpgrade(WeaponUpgrade.Upgrades upgradeType)
     {
-        if (upgradeType == WeaponUpgrade.PistolUpgrades.FireDamage)
+        if (upgradeType == WeaponUpgrade.Upgrades.P_FireDamage)
         {
             bulletEffect = BulletEffects.Fire;
         }
-        else if (upgradeType == WeaponUpgrade.PistolUpgrades.Akimbo)
-        {
-            //Akimbo
-        }
-        else if (upgradeType == WeaponUpgrade.PistolUpgrades.StatBoost)
+        else if (upgradeType == WeaponUpgrade.Upgrades.P_StatBoost)
         {
 
             maxAmmoLoaded += 3;
@@ -257,31 +253,21 @@ public class Gun : MonoBehaviour
             damageMultiplier *= 1.2f;
             range += 5.0f;
         }
-        else if (upgradeType == WeaponUpgrade.PistolUpgrades.SlowingBullets)
+        else if (upgradeType == WeaponUpgrade.Upgrades.P_SlowingBullets)
         {
             bulletEffect = BulletEffects.Slowing;
         }
-        else if (upgradeType == WeaponUpgrade.PistolUpgrades.NoReload)
+        else if (upgradeType == WeaponUpgrade.Upgrades.P_NoReload)
         {
             maxAmmoLoaded = maxAmmo;
             currentAmmoLoaded = ammoCount;
         }
-        else if (upgradeType == WeaponUpgrade.PistolUpgrades.BigBullets)
+        else if (upgradeType == WeaponUpgrade.Upgrades.P_BigBullets)
         {
             //damageMultiplier *= 5.0f;
             shotDelay = 1.0f;
             range += 20.0f;
             altFire = true;
         }
-    }
-
-    public void PickupAssaultRifleUpgrade(WeaponUpgrade.AssaultRifleUpgrades upgradeTypee)
-    {
-
-    }
-
-    public void PickupShotgunUpgrade(WeaponUpgrade.ShotgunUpgrades upgradeType)
-    {
-
     }
 }

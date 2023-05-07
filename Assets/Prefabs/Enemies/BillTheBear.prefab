@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 335628370}
   - component: {fileID: 335628369}
+  - component: {fileID: 1416611249}
   m_Layer: 7
   m_Name: Attack Box
   m_TagString: Untagged
@@ -58,6 +59,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8559977, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1416611249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335628368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e38c186bed0f4a4491e67f67a0d76a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!1 &1064178853
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +342,7 @@ GameObject:
   - component: {fileID: 913477764}
   - component: {fileID: 913477770}
   - component: {fileID: 913477765}
+  - component: {fileID: 913477776}
   m_Layer: 7
   m_Name: BillTheBear
   m_TagString: Enemy
@@ -350,7 +365,7 @@ Transform:
   - {fileID: 335628370}
   - {fileID: 1064178854}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1551026080581598672
 SpriteRenderer:
@@ -420,6 +435,7 @@ MonoBehaviour:
   target: {fileID: 0}
   attackBox: {fileID: 335628368}
   aggroDistance: 10
+  attackCooldown: 1
 --- !u!114 &-1528474730090604000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +452,7 @@ MonoBehaviour:
   healthBarFill: {fileID: 2097756008}
   healthBarBackground: {fileID: 1789113882}
   hasHealthBar: 1
+  effectTime: 5
 --- !u!61 &913477764
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -492,7 +509,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.2
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -504,3 +521,19 @@ NavMeshAgent:
   m_BaseOffset: 1.1333333
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &913477776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089827667290817894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cd9193e23124947b799f0803d6d98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CommonDrops:
+  - {fileID: 2307498189652113325, guid: 8afe8dab38db5754f8826548eddc5d39, type: 3}
+  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
+  RareDrops: []
