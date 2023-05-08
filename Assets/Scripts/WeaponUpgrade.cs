@@ -27,7 +27,7 @@ public class WeaponUpgrade : MonoBehaviour
     Upgrades option1;
     Upgrades option2;
 
-    GameObject optionHUD;
+    [SerializeField] GameObject optionHUD;
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +45,9 @@ public class WeaponUpgrade : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (collision.GetComponent<Gun>() != null)
+            if (collision.GetComponentInChildren<Gun>() != null)
             {
-                Gun gun = collision.GetComponent<Gun>();
+                Gun gun = collision.GetComponentInChildren<Gun>();
 
                 int random1 = Random.Range(1, 6);
                 int random2;
@@ -250,8 +250,11 @@ public class WeaponUpgrade : MonoBehaviour
 
                 }
 
+                collision.GetComponent<TopDownCharacterController>().enabled = false;
                 optionHUD.SetActive(true);
                 optionHUD.GetComponent<WeaponPickupOptions>().SetOptions(option1, option2);
+                Destroy(gameObject);
+                Destroy(this);
             }
         }
     }

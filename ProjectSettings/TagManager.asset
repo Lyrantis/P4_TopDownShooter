@@ -21,7 +21,7 @@ TagManager:
   - Enemy
   - Player Projectile
   - Enemy Projectile
-  - Water
+  - 
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UISprites
+    uniqueID: 77858767
     locked: 0

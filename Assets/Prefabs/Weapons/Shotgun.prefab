@@ -170,8 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779202c44906b674d8f03bdf056aca05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reloadTime: 0
   projectile: {fileID: 629709408109648515, guid: 330e57b2f24ff924790a43ac378ebb0d, type: 3}
+  alternateProjectile: {fileID: 629709408109648515, guid: 7ad727dee93bef343b9402cc970fd815, type: 3}
   firePoint: {fileID: 1018994695}
   maxSpreadAngle: 5
+  range: 10
+  isFiring: 0
+  bulletEffect: 0
   type: 2
   level: 1

@@ -20,6 +20,8 @@ public class BillTheBear : MonoBehaviour
 
     private Animator anim;
 
+    private GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,9 @@ public class BillTheBear : MonoBehaviour
         attackBox.SetActive(false);
         anim = GetComponent<Animator>();
         anim.SetBool("Idle", true);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        target = player.transform;
     }
 
     // Update is called once per frame

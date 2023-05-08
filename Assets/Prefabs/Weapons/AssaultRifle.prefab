@@ -172,8 +172,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloadTime: 0
   projectile: {fileID: 629709408109648515, guid: 36eb8fb6ec7992545a8ecdadf9ad7500, type: 3}
+  alternateProjectile: {fileID: 629709408109648515, guid: 7c41b30079aceba4cb3c0eca3e65c824, type: 3}
   firePoint: {fileID: 1541450651}
   maxSpreadAngle: 6
+  range: 10
   isFiring: 0
+  bulletEffect: 0
   type: 3
   level: 1

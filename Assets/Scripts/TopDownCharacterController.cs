@@ -37,6 +37,11 @@ public class TopDownCharacterController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void OnDisable()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
     /// <summary>
     /// When a fixed update cycle is called
     /// </summary>

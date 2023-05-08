@@ -29,8 +29,9 @@ public class Gun : MonoBehaviour
     public GameObject firePoint;
     public float maxSpreadAngle;
     public float range = 10.0f;
-    private bool autofire = false;
     public bool isFiring = false;
+    private bool tripleShot = false;
+    private bool doubleShot = false;
     private bool isReloading = false;
     public BulletEffects bulletEffect;
     private bool altFire = false;
@@ -119,26 +120,89 @@ public class Gun : MonoBehaviour
                     Vector2 rotatedDirection = new Vector2(distance.x * Mathf.Cos(angleToAdjust) - distance.y * Mathf.Sin(angleToAdjust), distance.x * Mathf.Sin(angleToAdjust) + distance.y * Mathf.Cos(angleToAdjust));
                     rotatedDirection.Normalize();
 
+                    Vector2 rotatedDirection1 = new Vector2(distance.x * Mathf.Cos(angleToAdjust + (3.0f * Mathf.Deg2Rad)) - distance.y * Mathf.Sin(angleToAdjust + (3.0f * Mathf.Deg2Rad)), distance.x * Mathf.Sin(angleToAdjust + (3.0f * Mathf.Deg2Rad)) + distance.y * Mathf.Cos(angleToAdjust + (3.0f * Mathf.Deg2Rad)));
+                    Vector2 rotatedDirection2 = new Vector2(distance.x * Mathf.Cos(angleToAdjust - (3.0f * Mathf.Deg2Rad)) - distance.y * Mathf.Sin(angleToAdjust - (3.0f * Mathf.Deg2Rad)), distance.x * Mathf.Sin(angleToAdjust - (3.0f * Mathf.Deg2Rad)) + distance.y * Mathf.Cos(angleToAdjust - (3.0f * Mathf.Deg2Rad)));
+
                     GameObject bullet;
 
-                    if (altFire)
+                    if (tripleShot)
                     {
-                        bullet = Instantiate(alternateProjectile, firePoint.transform);
+                        if (altFire)
+                        {
+                            bullet = Instantiate(alternateProjectile, firePoint.transform);
+                        }
+                        else
+                        {
+                            bullet = Instantiate(projectile, firePoint.transform);
+                        }
+
+
+                        bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
+                        bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
+                        bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
+                        bullet.GetComponent<Projectile>().SetRange(range);
+                        bullet.transform.SetParent(null);
+
+                        if (altFire)
+                        {
+                            bullet = Instantiate(alternateProjectile, firePoint.transform);
+                        }
+                        else
+                        {
+                            bullet = Instantiate(projectile, firePoint.transform);
+                        }
+
+
+                        bullet.GetComponent<Projectile>().SetDirection(rotatedDirection1);
+                        bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
+                        bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
+                        bullet.GetComponent<Projectile>().SetRange(range);
+                        bullet.transform.SetParent(null);
+
+                        if (altFire)
+                        {
+                            bullet = Instantiate(alternateProjectile, firePoint.transform);
+                        }
+                        else
+                        {
+                            bullet = Instantiate(projectile, firePoint.transform);
+                        }
+
+
+                        bullet.GetComponent<Projectile>().SetDirection(rotatedDirection2);
+                        bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
+                        bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
+                        bullet.GetComponent<Projectile>().SetRange(range);
+                        bullet.transform.SetParent(null);
                     }
                     else
                     {
-                        bullet = Instantiate(projectile, firePoint.transform);
+                        if (altFire)
+                        {
+                            bullet = Instantiate(alternateProjectile, firePoint.transform);
+                        }
+                        else
+                        {
+                            bullet = Instantiate(projectile, firePoint.transform);
+                        }
+
+
+                        bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
+                        bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
+                        bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
+                        bullet.GetComponent<Projectile>().SetRange(range);
+                        bullet.transform.SetParent(null);
                     }
                     
-                    
-                    bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
-                    bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
-                    bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
-                    bullet.GetComponent<Projectile>().SetRange(range);
-                    bullet.transform.SetParent(null);
                 }
                 
                 currentAmmoLoaded -= 1;
+
+                if (doubleShot)
+                {
+                    StartCoroutine(FollowUpShot());
+                }
+               
             }
             else
             {
@@ -147,6 +211,48 @@ public class Gun : MonoBehaviour
 
             currentShotDelay = shotDelay;
 
+        }
+    }
+
+    IEnumerator FollowUpShot()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        if (currentAmmoLoaded > 0)
+        {
+            Vector3 MousePos = Mouse.current.position.ReadValue();
+            MousePos.z = Camera.main.nearClipPlane;
+
+            MousePos = Camera.main.ScreenToWorldPoint(MousePos);
+
+            Vector2 distance = new Vector2(MousePos.x - gameObject.transform.position.x, MousePos.y - gameObject.transform.position.y);
+            float angleRad = maxSpreadAngle * Mathf.Deg2Rad;
+            float angleToAdjust = Random.Range(-angleRad, angleRad);
+            Vector2 rotatedDirection = new Vector2(distance.x * Mathf.Cos(angleToAdjust) - distance.y * Mathf.Sin(angleToAdjust), distance.x * Mathf.Sin(angleToAdjust) + distance.y * Mathf.Cos(angleToAdjust));
+            rotatedDirection.Normalize();
+
+            Vector2 rotatedDirection1 = new Vector2(distance.x * Mathf.Cos(angleToAdjust + 3.0f) - distance.y * Mathf.Sin(angleToAdjust + 3.0f), distance.x * Mathf.Sin(angleToAdjust + 3.0f) + distance.y * Mathf.Cos(angleToAdjust + 3.0f));
+            Vector2 rotatedDirection2 = new Vector2(distance.x * Mathf.Cos(angleToAdjust - 3.0f) - distance.y * Mathf.Sin(angleToAdjust - 3.0f), distance.x * Mathf.Sin(angleToAdjust - 3.0f) + distance.y * Mathf.Cos(angleToAdjust - 3.0f));
+
+            GameObject bullet;
+
+            if (altFire)
+            {
+                bullet = Instantiate(alternateProjectile, firePoint.transform);
+            }
+            else
+            {
+                bullet = Instantiate(projectile, firePoint.transform);
+            }
+
+
+            bullet.GetComponent<Projectile>().SetDirection(rotatedDirection);
+            bullet.GetComponent<Projectile>().SetPlayerProjectile(true);
+            bullet.GetComponent<Projectile>().MultiplyDamage(damageMultiplier);
+            bullet.GetComponent<Projectile>().SetRange(range);
+            bullet.transform.SetParent(null);
+
+            currentAmmoLoaded--;
         }
     }
 
@@ -168,7 +274,6 @@ public class Gun : MonoBehaviour
                 projectileCount = 1;
                 shotDelay = 0.5f;
                 maxSpreadAngle = 3.0f;
-                autofire = false;
                 reloadTime = 2.0f;
                 range = 10.0f;
                 break;
@@ -180,7 +285,6 @@ public class Gun : MonoBehaviour
                 projectileCount = 10;
                 shotDelay = 1.5f;
                 maxSpreadAngle = 5.0f;
-                autofire = false;
                 reloadTime = 3.0f;
                 range = 5.0f;
                 break;
@@ -192,7 +296,6 @@ public class Gun : MonoBehaviour
                 projectileCount = 1;
                 shotDelay = 0.1f;
                 maxSpreadAngle = 4.0f;
-                autofire = true;
                 reloadTime = 3.0f;
                 range = 15.0f;
                 break;
@@ -225,7 +328,7 @@ public class Gun : MonoBehaviour
 
     public void PickupUpgrade(WeaponUpgrade.Upgrades upgradeType)
     {
-        if (upgradeType == WeaponUpgrade.Upgrades.P_FireDamage)
+        if (upgradeType == WeaponUpgrade.Upgrades.P_FireDamage || upgradeType == WeaponUpgrade.Upgrades.AR_FireDamage)
         {
             bulletEffect = BulletEffects.Fire;
         }
@@ -253,11 +356,11 @@ public class Gun : MonoBehaviour
             damageMultiplier *= 1.2f;
             range += 5.0f;
         }
-        else if (upgradeType == WeaponUpgrade.Upgrades.P_SlowingBullets)
+        else if (upgradeType == WeaponUpgrade.Upgrades.P_SlowingBullets || upgradeType == WeaponUpgrade.Upgrades.SH_SlowingBullets)
         {
             bulletEffect = BulletEffects.Slowing;
         }
-        else if (upgradeType == WeaponUpgrade.Upgrades.P_NoReload)
+        else if (upgradeType == WeaponUpgrade.Upgrades.P_NoReload || upgradeType == WeaponUpgrade.Upgrades.AR_NoReload || upgradeType == WeaponUpgrade.Upgrades.SH_NoReload)
         {
             maxAmmoLoaded = maxAmmo;
             currentAmmoLoaded = ammoCount;
@@ -268,6 +371,64 @@ public class Gun : MonoBehaviour
             shotDelay = 1.0f;
             range += 20.0f;
             altFire = true;
+        }
+        else if (upgradeType == WeaponUpgrade.Upgrades.AR_TripleShot)
+        {
+            tripleShot = true;
+        }
+        else if (upgradeType == WeaponUpgrade.Upgrades.AR_StatBoost)
+        {
+            maxAmmoLoaded += 5;
+            maxAmmo = maxAmmoLoaded * 12;
+
+            if (shotDelay > 0.02f)
+            {
+                shotDelay -= 0.02f;
+            }
+
+            if (maxSpreadAngle > 0)
+            {
+                maxSpreadAngle -= 0.5f;
+            }
+
+            if (reloadTime > 1.0f)
+            {
+                reloadTime -= 0.25f;
+            }
+
+            damageMultiplier *= 1.2f;
+            range += 5.0f;
+        }
+        else if (upgradeType == WeaponUpgrade.Upgrades.AR_HyperFire)
+        {
+            shotDelay = 0.02f;
+            maxSpreadAngle = 8.0f;
+            damageMultiplier = 0.2f;
+
+            maxAmmoLoaded = 80;
+
+            maxAmmo = maxAmmoLoaded * 12;
+        }
+        else if (upgradeType == WeaponUpgrade.Upgrades.SH_DoubleAction)
+        {
+            doubleShot = true;
+        }
+        else if (upgradeType == WeaponUpgrade.Upgrades.SH_Slugs)
+        {
+            altFire = true;
+            projectileCount = 1;
+            maxSpreadAngle = 1.0f;
+            range += 10.0f;
+        }
+        else if (upgradeType == WeaponUpgrade.Upgrades.SH_StatBoost)
+        {
+            projectileCount += 2;
+            damageMultiplier = 1.1f;
+
+            shotDelay -= 0.1f;
+
+            maxAmmoLoaded += 1;
+            maxAmmo = maxAmmoLoaded * 12;
         }
     }
 }
