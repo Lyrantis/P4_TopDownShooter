@@ -24,6 +24,11 @@ public class WeaponUpgrade : MonoBehaviour
         SH_Slugs
     }
 
+    Upgrades option1;
+    Upgrades option2;
+
+    GameObject optionHUD;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,11 +60,198 @@ public class WeaponUpgrade : MonoBehaviour
 
                 if (gun.type == Gun.WeaponType.Pistol)
                 {
+                    switch (random1)
+                    {
+                        case 1:
+
+                            option1 = Upgrades.P_FireDamage;
+                            break;
+
+                        case 2:
+
+                            option1 = Upgrades.P_StatBoost;
+                            break;
+
+                        case 3:
+
+                            option1 = Upgrades.P_NoReload;
+                            break;
+
+                        case 4:
+
+                            option1 = Upgrades.P_SlowingBullets;
+                            break;
+
+                        case 5:
+
+                            option1= Upgrades.P_BigBullets;
+                            break;
+
+
+                    } 
+                    
+                    switch (random2)
+                    {
+                        case 1:
+
+                            option2 = Upgrades.P_FireDamage;
+                            break;
+
+                        case 2:
+
+                            option2 = Upgrades.P_StatBoost;
+                            break;
+
+                        case 3:
+
+                            option2 = Upgrades.P_NoReload;
+                            break;
+
+                        case 4:
+
+                            option2 = Upgrades.P_SlowingBullets;
+                            break;
+
+                        case 5:
+
+                            option2= Upgrades.P_BigBullets;
+                            break;
+
+
+                    }
 
                 }
-                //Disable player movement
-                //Pick 2 random upgrades 
-                //Show Upgrade Options
+                
+                if (gun.type == Gun.WeaponType.AssaultRifle)
+                {
+                    switch (random1)
+                    {
+                        case 1:
+
+                            option1 = Upgrades.AR_FireDamage;
+                            break;
+
+                        case 2:
+
+                            option1 = Upgrades.AR_StatBoost;
+                            break;
+
+                        case 3:
+
+                            option1 = Upgrades.AR_NoReload;
+                            break;
+
+                        case 4:
+
+                            option1 = Upgrades.AR_TripleShot;
+                            break;
+
+                        case 5:
+
+                            option1= Upgrades.AR_HyperFire;
+                            break;
+
+
+                    }
+
+                    switch (random2)
+                    {
+                        case 1:
+
+                            option2 = Upgrades.AR_FireDamage;
+                            break;
+
+                        case 2:
+
+                            option2 = Upgrades.AR_StatBoost;
+                            break;
+
+                        case 3:
+
+                            option2 = Upgrades.AR_NoReload;
+                            break;
+
+                        case 4:
+
+                            option2 = Upgrades.AR_TripleShot;
+                            break;
+
+                        case 5:
+
+                            option2= Upgrades.AR_HyperFire;
+                            break;
+
+
+                    }
+
+                }
+                
+                if (gun.type == Gun.WeaponType.Shotgun)
+                {
+                    switch (random1)
+                    {
+                        case 1:
+
+                            option1 = Upgrades.SH_DoubleAction;
+                            break;
+
+                        case 2:
+
+                            option1 = Upgrades.SH_StatBoost;
+                            break;
+
+                        case 3:
+
+                            option1 = Upgrades.SH_NoReload;
+                            break;
+
+                        case 4:
+
+                            option1 = Upgrades.SH_SlowingBullets;
+                            break;
+
+                        case 5:
+
+                            option1= Upgrades.SH_Slugs;
+                            break;
+
+
+                    }
+                    
+                    switch (random2)
+                    {
+                        case 1:
+
+                            option2 = Upgrades.SH_DoubleAction;
+                            break;
+
+                        case 2:
+
+                            option2 = Upgrades.SH_StatBoost;
+                            break;
+
+                        case 3:
+
+                            option2 = Upgrades.SH_NoReload;
+                            break;
+
+                        case 4:
+
+                            option2 = Upgrades.SH_SlowingBullets;
+                            break;
+
+                        case 5:
+
+                            option2= Upgrades.SH_Slugs;
+                            break;
+
+
+                    }
+
+                }
+
+                optionHUD.SetActive(true);
+                optionHUD.GetComponent<WeaponPickupOptions>().SetOptions(option1, option2);
             }
         }
     }
