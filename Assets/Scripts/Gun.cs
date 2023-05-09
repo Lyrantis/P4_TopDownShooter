@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +36,8 @@ public class Gun : MonoBehaviour
     private bool isReloading = false;
     public BulletEffects bulletEffect;
     private bool altFire = false;
+
+    [SerializeField] GameObject AmmoCount;
 
     public enum WeaponType
     {
@@ -96,7 +99,8 @@ public class Gun : MonoBehaviour
             currentAmmoLoaded = ammoCount;
             ammoCount = 0;
         }
-        
+
+        AmmoCount.GetComponent<TextMeshPro>().text = "Ammo:\n" + currentAmmoLoaded + "/" + AmmoCount; 
     }
 
     public void Shoot()
@@ -202,6 +206,8 @@ public class Gun : MonoBehaviour
                 {
                     StartCoroutine(FollowUpShot());
                 }
+
+                AmmoCount.GetComponent<TextMeshPro>().text = "Ammo:\n" + currentAmmoLoaded + "/" + AmmoCount;
                
             }
             else
@@ -253,6 +259,8 @@ public class Gun : MonoBehaviour
             bullet.transform.SetParent(null);
 
             currentAmmoLoaded--;
+
+            AmmoCount.GetComponent<TextMeshPro>().text = "Ammo:\n" + currentAmmoLoaded + "/" + AmmoCount;
         }
     }
 
@@ -308,6 +316,8 @@ public class Gun : MonoBehaviour
         ammoCount = maxAmmo;
         currentShotDelay = 0;
         currentReloadTime = reloadTime;
+
+        AmmoCount.GetComponent<TextMeshPro>().text = "Ammo:\n" + currentAmmoLoaded + "/" + AmmoCount;
     }
 
     public void SetLevel(int newLevel)
@@ -324,6 +334,8 @@ public class Gun : MonoBehaviour
     {
         ammoCount = maxAmmo;
         currentAmmoLoaded = maxAmmoLoaded;
+
+        AmmoCount.GetComponent<TextMeshPro>().text = "Ammo:\n" + currentAmmoLoaded + "/" + AmmoCount;
     }
 
     public void PickupUpgrade(WeaponUpgrade.Upgrades upgradeType)
@@ -430,5 +442,8 @@ public class Gun : MonoBehaviour
             maxAmmoLoaded += 1;
             maxAmmo = maxAmmoLoaded * 12;
         }
+        AmmoCount.GetComponent<TextMeshPro>().text = "Ammo:\n" + currentAmmoLoaded + "/" + AmmoCount;
+
     }
+
 }

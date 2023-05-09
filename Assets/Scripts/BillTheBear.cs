@@ -37,43 +37,48 @@ public class BillTheBear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).magnitude;
 
-        if (distanceToPlayer < aggroDistance || GetComponent<HealthComponent>().GetHealth() < GetComponent<HealthComponent>().maxHealth)
+        if (player != null)
         {
-            aggro = true;
-            moving = true;
-            anim.SetBool("Moving", true);
+            float distanceToPlayer = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).magnitude;
+
+            if (distanceToPlayer < aggroDistance || GetComponent<HealthComponent>().GetHealth() < GetComponent<HealthComponent>().maxHealth)
+            {
+                aggro = true;
+                moving = true;
+                anim.SetBool("Moving", true);
+            }
+
+            if (aggro && moving)
+            {
+                if (transform.position.x < target.position.x)
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    attackBox.transform.localPosition = new Vector2(-attackBoxOffset, 0);
+                }
+                else
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    attackBox.transform.localPosition = new Vector2(attackBoxOffset, 0);
+                }
+
+                if (distanceToPlayer <= attackRange && canAttack)
+                {
+                    canAttack = false;
+                    attackBox.SetActive(true);
+                    moving = false;
+                    anim.SetBool("Attacking", true);
+                    StartCoroutine(StopAttack(1.0f));
+
+                }
+
+                agent.SetDestination(target.position);
+            }
+
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
-        if (aggro && moving)
-        {
-            if (transform.position.x < target.position.x)
-            {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                attackBox.transform.localPosition = new Vector2(-attackBoxOffset, 0);
-            }
-            else
-            {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                attackBox.transform.localPosition = new Vector2(attackBoxOffset, 0); 
-            }
-
-            if (distanceToPlayer <= attackRange && canAttack)
-            {
-                canAttack = false;
-                attackBox.SetActive(true);
-                moving = false;
-                anim.SetBool("Attacking", true);
-                StartCoroutine(StopAttack(1.0f));
-                
-            }
-
-            agent.SetDestination(target.position);
-        }
-
-        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
+        
 
     IEnumerator StopAttack(float timeToAttack)
     {

@@ -11,6 +11,10 @@ public class HealthComponent : MonoBehaviour
     private int currentHealth;
     [SerializeField] Image healthBarFill;
     [SerializeField] Image healthBarBackground;
+
+    [SerializeField] List<GameObject> CommonDrops = new List<GameObject>();
+    [SerializeField] List<GameObject> RareDrops = new List<GameObject>();
+
     public bool hasHealthBar = true;
     private float healthBarLifeTime = 2.0f;
     private Projectile.projectileEffects status = Projectile.projectileEffects.None;
@@ -80,6 +84,24 @@ public class HealthComponent : MonoBehaviour
 
     private void Die()
     {
+
+        if (Application.isPlaying)
+        {
+            int random = Random.Range(0, 100);
+            int randObject;
+
+            if (random <= 5)
+            {
+                randObject = Random.Range(0, RareDrops.Count);
+                Instantiate(RareDrops[randObject], transform);
+            }
+            else if (random <= 30)
+            {
+                randObject = Random.Range(0, CommonDrops.Count);
+                Instantiate(CommonDrops[randObject], transform);
+            }
+        }
+
         Destroy(gameObject);
         Destroy(this);
     }
