@@ -18,12 +18,22 @@ public class AttackBox : MonoBehaviour
         
     }
 
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             other.GetComponent<HealthComponent>().TakeDamage(damage);
             gameObject.SetActive(false);
+
+            if (gameObject.GetComponentInParent<Minotaur>() != null)
+            {
+                gameObject.GetComponentInParent<Minotaur>().playerHit = true;
+            }
         }
     }
 }

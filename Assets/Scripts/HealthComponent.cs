@@ -49,6 +49,7 @@ public class HealthComponent : MonoBehaviour
                 remainingTimeBetweenDamage = timeBetweenDamage;
             }
         }
+
     }
 
     public void TakeDamage(int damage)

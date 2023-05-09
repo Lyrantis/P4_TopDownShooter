@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12799883, y: 0}
+  m_Offset: {x: 0.12799883, y: 0.06394303}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8559977, y: 1}
+  m_Size: {x: 0.8559977, y: 1.8478363}
   m_EdgeRadius: 0
 --- !u!114 &1416611249
 MonoBehaviour:
@@ -365,7 +365,7 @@ Transform:
   - {fileID: 335628370}
   - {fileID: 1064178854}
   m_Father: {fileID: 0}
-  m_RootOrder: 52
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1551026080581598672
 SpriteRenderer:
@@ -451,6 +451,8 @@ MonoBehaviour:
   maxHealth: 60
   healthBarFill: {fileID: 2097756008}
   healthBarBackground: {fileID: 1789113882}
+  CommonDrops: []
+  RareDrops: []
   hasHealthBar: 1
   effectTime: 5
 --- !u!61 &913477764
@@ -533,7 +535,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cd9193e23124947b799f0803d6d98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CommonDrops:
-  - {fileID: 2307498189652113325, guid: 8afe8dab38db5754f8826548eddc5d39, type: 3}
-  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
-  RareDrops: []

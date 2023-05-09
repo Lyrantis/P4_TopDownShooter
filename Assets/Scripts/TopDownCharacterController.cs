@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,7 +27,9 @@ public class TopDownCharacterController : MonoBehaviour
     [SerializeField] private float playerMaxSpeed = 100.0f;
     public bool hasKey = false;
 
-    
+    [SerializeField] GameObject AmmoCount;
+
+
     /// <summary>
     /// When the script first initialises
     /// </summary>
@@ -160,9 +163,14 @@ public class TopDownCharacterController : MonoBehaviour
             }
         }
 
-
         animator.SetFloat("Horizontal", facingDirection.x);
         animator.SetFloat("Vertical", facingDirection.y);
+
+        if (gun != null)
+        {
+            AmmoCount.GetComponent<TextMeshProUGUI>().text = "Ammo:\n" + gun.GetComponent<Gun>().currentAmmoLoaded + "/" + gun.GetComponent<Gun>().ammoCount;
+        }
+        
     }
 
     public void OnPlayerInputShoot(InputAction.CallbackContext context)
