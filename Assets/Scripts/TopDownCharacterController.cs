@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -238,6 +239,14 @@ public class TopDownCharacterController : MonoBehaviour
         }
 
         gun = newGun;
+    }
+
+    public void Reload(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GetComponentInChildren<Gun>().StartReload();
+        }
     }
 
 }

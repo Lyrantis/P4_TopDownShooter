@@ -88,8 +88,8 @@ public class Gun : MonoBehaviour
     {
         if (ammoCount > maxAmmoLoaded)
         {
+            ammoCount -= (maxAmmoLoaded - currentAmmoLoaded);
             currentAmmoLoaded = maxAmmoLoaded;
-            ammoCount -= maxAmmoLoaded;
         }
         else
         {

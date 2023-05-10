@@ -68,9 +68,11 @@ public class Tree : MonoBehaviour
 
         for (int i = 0; i < r; i++)
         {
-            Instantiate(bat, batSpawnPoint.transform);
-            bat.transform.parent = null;
+            GameObject b = Instantiate(bat, batSpawnPoint.transform);
+            b.transform.parent = null;
+            b.transform.localScale = new Vector3(1, 1, 1);
         }
+        StartCoroutine(SpawnCooldown());
     }
 
     IEnumerator SpawnCooldown()
