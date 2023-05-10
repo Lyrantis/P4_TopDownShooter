@@ -28,32 +28,35 @@ public class Tree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).magnitude;
-
-        if (distanceToPlayer <= aggroDistance)
+        if (player != null)
         {
-            active = true;
-        }
+            float distanceToPlayer = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).magnitude;
 
-        if (active)
-        {
-            if (canSpawnBats)
+            if (distanceToPlayer <= aggroDistance)
             {
-                SpawnBats();
+                active = true;
+            }
+
+            if (active)
+            {
+                if (canSpawnBats)
+                {
+                    SpawnBats();
+                }
+                else
+                {
+                    //move
+                }
+            }
+
+            if (player.transform.position.x > transform.position.x)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
             }
             else
             {
-                //move
+                GetComponent<SpriteRenderer>().flipX = false;
             }
-        }
-
-        if (player.transform.position.x > transform.position.x)
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 

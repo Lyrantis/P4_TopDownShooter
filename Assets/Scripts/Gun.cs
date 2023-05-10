@@ -431,4 +431,10 @@ public class Gun : MonoBehaviour
             maxAmmo = maxAmmoLoaded * 12;
         }
     }
+
+    public void StartReload()
+    {
+        isReloading = true;
+        currentReloadTime = reloadTime; 
+    }
 }
