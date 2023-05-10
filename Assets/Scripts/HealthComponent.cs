@@ -93,13 +93,19 @@ public class HealthComponent : MonoBehaviour
 
             if (random <= 5)
             {
-                randObject = Random.Range(0, RareDrops.Count);
-                Instantiate(RareDrops[randObject], transform);
+                if (RareDrops.Count > 0)
+                {
+                    randObject = Random.Range(0, RareDrops.Count);
+                    Instantiate(RareDrops[randObject], transform);
+                }
             }
             else if (random <= 30)
             {
-                randObject = Random.Range(0, CommonDrops.Count);
-                Instantiate(CommonDrops[randObject], transform);
+                if (CommonDrops.Count > 0)
+                {
+                    randObject = Random.Range(0, CommonDrops.Count);
+                    Instantiate(CommonDrops[randObject], transform);
+                }
             }
         }
 

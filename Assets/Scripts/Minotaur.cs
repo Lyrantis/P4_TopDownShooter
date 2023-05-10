@@ -66,6 +66,18 @@ public class Minotaur : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        if (player != null)
+        {
+            if (target.position.x < transform.position.x)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -85,7 +97,6 @@ public class Minotaur : MonoBehaviour
             }
             else if (ableToAct)
             {
-                Debug.Log("Acting");
                 ableToAct = false;
                 float distanceToPlayer = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).magnitude;
 
@@ -168,7 +179,7 @@ public class Minotaur : MonoBehaviour
                 spinAttackBox.SetActive(true);
                 actionTime = 1.5f;
                 anim.SetInteger("Attacking", 4);
-                StartCoroutine(StopActions(actionTime));
+                StartCoroutine(SpawnBats(actionTime));
                 break;
 
             default:
@@ -180,22 +191,26 @@ public class Minotaur : MonoBehaviour
 
     IEnumerator SpawnBats(float spawnTime)
     {
+        Debug.Log("Gets in loop");
         for (int i = 0; i < batSpawnPoints.Count; i++)
         {
             yield return new WaitForSeconds(spawnTime / batSpawnPoints.Count);
-            Instantiate(bat, batSpawnPoints[i].transform);
+            Debug.Log("Spawning bat");
+            GameObject spawnedBat = Instantiate(bat, batSpawnPoints[i].transform);
+            spawnedBat.transform.parent = null;
+            spawnedBat.transform.localScale = new Vector3(5, 5, 5);
         }
+
+        StartCoroutine(StopActions(0.0f));
     }
 
     IEnumerator Charge()
     {
-        Debug.Log("Gets here");
         yield return new WaitForSeconds(1.5f);
 
         jabAttackBox.SetActive(true);
         chargeDirection = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).normalized;
         charging = true;
-        Debug.Log("Should move");
         anim.SetBool("Charging", false);
         anim.SetInteger("Attacking", 1);
         chargeTime = 0.0f;

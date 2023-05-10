@@ -20,7 +20,11 @@ public class Bat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(player.transform.position);
+        if (player != null)
+        {
+            agent.SetDestination(player.transform.position);
+        }
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
