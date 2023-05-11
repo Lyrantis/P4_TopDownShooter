@@ -10,7 +10,7 @@ public class BillTheBear : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] GameObject attackBox;
 
-    public float aggroDistance = 10.0f;
+    public float aggroDistance = 7.0f;
     private bool aggro = false;
     private bool moving = false;
     private bool canAttack = true;
@@ -54,12 +54,12 @@ public class BillTheBear : MonoBehaviour
                 if (transform.position.x < target.position.x)
                 {
                     gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                    attackBox.transform.localPosition = new Vector2(-attackBoxOffset, 0);
+                   // attackBox.transform.localPosition = new Vector2(-attackBoxOffset, 0);
                 }
                 else
                 {
                     gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    attackBox.transform.localPosition = new Vector2(attackBoxOffset, 0);
+                    //attackBox.transform.localPosition = new Vector2(attackBoxOffset, 0);
                 }
 
                 if (distanceToPlayer <= attackRange && canAttack)

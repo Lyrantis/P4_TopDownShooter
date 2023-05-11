@@ -352,9 +352,16 @@ public class Gun : MonoBehaviour
         }
         else if (upgradeType == WeaponUpgrade.Upgrades.P_StatBoost)
         {
-
-            maxAmmoLoaded += 3;
-            maxAmmo = maxAmmoLoaded * 12;
+            if (noReload)
+            {
+                maxAmmoLoaded += 10;
+                currentAmmoLoaded = maxAmmoLoaded;
+            }
+            else
+            {
+                maxAmmoLoaded += 3;
+                maxAmmo = maxAmmoLoaded * 12;
+            }
 
             if (shotDelay > 0.2f)
             {
@@ -380,10 +387,14 @@ public class Gun : MonoBehaviour
         }
         else if (upgradeType == WeaponUpgrade.Upgrades.P_NoReload || upgradeType == WeaponUpgrade.Upgrades.AR_NoReload || upgradeType == WeaponUpgrade.Upgrades.SH_NoReload)
         {
-            maxAmmoLoaded = maxAmmo;
-            currentAmmoLoaded = ammoCount;
-            maxAmmo = 0;
-            noReload = true;
+            if (!noReload)
+            {
+                maxAmmoLoaded = maxAmmo;
+                currentAmmoLoaded = ammoCount;
+                ammoCount = 0;
+                maxAmmo = 0;
+                noReload = true;
+            }
         }
         else if (upgradeType == WeaponUpgrade.Upgrades.P_BigBullets)
         {
@@ -399,8 +410,16 @@ public class Gun : MonoBehaviour
         }
         else if (upgradeType == WeaponUpgrade.Upgrades.AR_StatBoost)
         {
-            maxAmmoLoaded += 5;
-            maxAmmo = maxAmmoLoaded * 12;
+            if (noReload)
+            {
+                maxAmmoLoaded += 20;
+            }
+            else
+            {
+                maxAmmoLoaded += 5;
+                maxAmmo = maxAmmoLoaded * 12;
+            }
+            
 
             if (shotDelay > 0.02f)
             {
@@ -426,10 +445,19 @@ public class Gun : MonoBehaviour
             maxSpreadAngle = 8.0f;
             damageMultiplier = 0.3f;
 
-            maxAmmoLoaded = 80;
+            if (!noReload)
+            {
+                maxAmmoLoaded = 80;
 
-            maxAmmo = maxAmmoLoaded * 12;
-            ammoCount = maxAmmo;
+                maxAmmo = maxAmmoLoaded * 12;
+                ammoCount = maxAmmo;
+            }
+            else
+            {
+                maxAmmoLoaded *= 3;
+                currentAmmoLoaded = maxAmmoLoaded;
+            }
+            
         }
         else if (upgradeType == WeaponUpgrade.Upgrades.SH_DoubleAction)
         {
@@ -449,8 +477,16 @@ public class Gun : MonoBehaviour
 
             shotDelay -= 0.1f;
 
-            maxAmmoLoaded += 1;
-            maxAmmo = maxAmmoLoaded * 12;
+
+            if (noReload)
+            {
+                maxAmmoLoaded += 5;
+            }
+            else
+            {
+                maxAmmoLoaded += 1;
+                maxAmmo = maxAmmoLoaded * 12;
+            }  
         }
     }
 

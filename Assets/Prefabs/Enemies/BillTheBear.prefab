@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12799883, y: 0.06394303}
+  m_Offset: {x: 0.5770728, y: 0.06394303}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8559977, y: 1.8478363}
+  m_Size: {x: 1.7541455, y: 1.8478363}
   m_EdgeRadius: 0
 --- !u!114 &1416611249
 MonoBehaviour:
@@ -364,7 +364,7 @@ Transform:
   - {fileID: 335628370}
   - {fileID: 1064178854}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1551026080581598672
 SpriteRenderer:
@@ -433,7 +433,7 @@ MonoBehaviour:
   agent: {fileID: 913477765}
   target: {fileID: 0}
   attackBox: {fileID: 335628368}
-  aggroDistance: 10
+  aggroDistance: 7
   attackCooldown: 1
 --- !u!114 &-1528474730090604000
 MonoBehaviour:
@@ -470,7 +470,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003526166, y: -0.02922523}
+  m_Offset: {x: -0.11218323, y: -0.032154813}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -481,7 +481,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8283584, y: 0.742419}
+  m_Size: {x: 0.4739062, y: 0.6428205}
   m_EdgeRadius: 0
 --- !u!95 &913477770
 Animator:
@@ -513,7 +513,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 13
   m_AngularSpeed: 120

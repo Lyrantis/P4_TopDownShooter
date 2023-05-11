@@ -37,10 +37,20 @@ public class SydTheSquid : MonoBehaviour
             case Direction.Up:
 
                 projectileDirection = Vector2.up;
+
+                if (GetComponent<SpriteRenderer>().flipX)
+                {
+                    flipProjectileSprite = true;
+                }
                 break;
 
             case Direction.Down:
                 projectileDirection = Vector2.down;
+
+                if (GetComponent<SpriteRenderer>().flipX)
+                {
+                    flipProjectileSprite = true;
+                }
                 break;
 
             default:

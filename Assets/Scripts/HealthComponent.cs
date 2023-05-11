@@ -105,7 +105,7 @@ public class HealthComponent : MonoBehaviour
                     GameObject dropped = Instantiate(RareDrops[randObject], transform.position, transform.rotation);
                 }
             }
-            else if (random <= 30)
+            else if (random <= 25)
             {
                 if (CommonDrops.Count > 0)
                 {
