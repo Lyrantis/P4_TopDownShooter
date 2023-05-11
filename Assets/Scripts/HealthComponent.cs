@@ -48,6 +48,11 @@ public class HealthComponent : MonoBehaviour
                 TakeDamage(2);
                 remainingTimeBetweenDamage = timeBetweenDamage;
             }
+
+            if (currentEffectTime <= 0.0f)
+            {
+                status = Projectile.projectileEffects.None;
+            }
         }
 
     }
@@ -95,17 +100,29 @@ public class HealthComponent : MonoBehaviour
             {
                 if (RareDrops.Count > 0)
                 {
+                    Debug.Log("Dropping Rare");
                     randObject = Random.Range(0, RareDrops.Count);
-                    Instantiate(RareDrops[randObject], transform);
+                    GameObject dropped = Instantiate(RareDrops[randObject], transform.position, transform.rotation);
                 }
             }
             else if (random <= 30)
             {
                 if (CommonDrops.Count > 0)
                 {
+                    Debug.Log("Dropping Common");
                     randObject = Random.Range(0, CommonDrops.Count);
-                    Instantiate(CommonDrops[randObject], transform);
+                    GameObject dropped = Instantiate(CommonDrops[randObject], transform.position, transform.rotation);
                 }
+            }
+
+            if (gameObject.CompareTag("Player"))
+            {
+                gameObject.GetComponent<TopDownCharacterController>().Die();
+            }
+            else if (gameObject.GetComponent<Minotaur>() != null)
+            {
+                gameObject.GetComponent<Minotaur>().Die();
+                Destroy(this);
             }
         }
 

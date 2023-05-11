@@ -76,6 +76,7 @@ public class Projectile : MonoBehaviour
             other.gameObject.GetComponent<HealthComponent>().TakeDamage(damage);
             if (effect != projectileEffects.None)
             {
+                Debug.Log("Setting effect");
                 other.gameObject.GetComponent<HealthComponent>().ApplyEffect(effect);
             }
 

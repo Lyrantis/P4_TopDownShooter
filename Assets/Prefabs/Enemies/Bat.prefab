@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 77
+  m_RootOrder: 79
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &-8579969748205272111
 BoxCollider2D:
@@ -47,7 +47,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000031292439, y: -0.017817013}
@@ -182,12 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d476f05a1a73409e89cfc280464f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 1
   healthBarFill: {fileID: 0}
   healthBarBackground: {fileID: 0}
   CommonDrops: []
   RareDrops:
-  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
   - {fileID: 2307498189652113325, guid: 8afe8dab38db5754f8826548eddc5d39, type: 3}
+  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
   hasHealthBar: 0
   effectTime: 5

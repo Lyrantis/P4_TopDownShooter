@@ -342,7 +342,6 @@ GameObject:
   - component: {fileID: 913477764}
   - component: {fileID: 913477770}
   - component: {fileID: 913477765}
-  - component: {fileID: 913477776}
   m_Layer: 7
   m_Name: BillTheBear
   m_TagString: Enemy
@@ -451,8 +450,11 @@ MonoBehaviour:
   maxHealth: 60
   healthBarFill: {fileID: 2097756008}
   healthBarBackground: {fileID: 1789113882}
-  CommonDrops: []
-  RareDrops: []
+  CommonDrops:
+  - {fileID: 2307498189652113325, guid: 8afe8dab38db5754f8826548eddc5d39, type: 3}
+  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
+  RareDrops:
+  - {fileID: 1383070983853302724, guid: 0d6d8b598d563b6449a5859ba7b2f33a, type: 3}
   hasHealthBar: 1
   effectTime: 5
 --- !u!61 &913477764
@@ -511,7 +513,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 13
   m_AngularSpeed: 120
@@ -523,15 +525,3 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &913477776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089827667290817894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41cd9193e23124947b799f0803d6d98d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

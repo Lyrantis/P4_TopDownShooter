@@ -27,12 +27,25 @@ public class WeaponUpgrade : MonoBehaviour
     Upgrades option1;
     Upgrades option2;
 
-    [SerializeField] GameObject optionHUD;
+    private GameObject optionHUD;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        optionHUD = GameObject.FindGameObjectWithTag("OptionsHUD");
+
+        if (optionHUD != null)
+        {
+            Debug.Log("Found it");
+            for(int i = 0; i < optionHUD.transform.childCount; i++)
+            {
+                optionHUD.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("Failed to find HUD");
+        }
     }
 
     // Update is called once per frame
@@ -251,7 +264,10 @@ public class WeaponUpgrade : MonoBehaviour
                 }
 
                 collision.GetComponent<TopDownCharacterController>().enabled = false;
-                optionHUD.SetActive(true);
+                for (int i = 0; i < optionHUD.transform.childCount; i++)
+                {
+                    optionHUD.transform.GetChild(i).gameObject.SetActive(true);
+                }
                 optionHUD.GetComponent<WeaponPickupOptions>().SetOptions(option1, option2);
                 Destroy(gameObject);
                 Destroy(this);

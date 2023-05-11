@@ -25,13 +25,12 @@ public class Bat : MonoBehaviour
             agent.SetDestination(player.transform.position);
         }
         transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        float distanceToPlayer = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).magnitude;
+
+        if (distanceToPlayer < 0.8f)
         {
-            collision.GetComponent<HealthComponent>().TakeDamage(damage);
+            player.GetComponent<HealthComponent>().TakeDamage(damage);
             Destroy(gameObject);
             Destroy(this);
         }

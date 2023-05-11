@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Minotaur : MonoBehaviour
 {
 
+    [SerializeField] GameObject trophy;
     [Header("NavMesh")]
 
     [SerializeField] NavMeshAgent agent;
@@ -103,7 +104,7 @@ public class Minotaur : MonoBehaviour
                 ableToMove = false;
                 anim.SetBool("Running", false);
 
-                if (distanceToPlayer <= 2.5f)
+                if (distanceToPlayer <= 3.0f)
                 {
                     PickCloseAction();
                 }
@@ -191,14 +192,10 @@ public class Minotaur : MonoBehaviour
 
     IEnumerator SpawnBats(float spawnTime)
     {
-        Debug.Log("Gets in loop");
         for (int i = 0; i < batSpawnPoints.Count; i++)
         {
             yield return new WaitForSeconds(spawnTime / batSpawnPoints.Count);
-            Debug.Log("Spawning bat");
-            GameObject spawnedBat = Instantiate(bat, batSpawnPoints[i].transform);
-            spawnedBat.transform.parent = null;
-            spawnedBat.transform.localScale = new Vector3(5, 5, 5);
+            GameObject spawnedBat = Instantiate(bat, batSpawnPoints[i].transform.position, transform.rotation);
         }
 
         StartCoroutine(StopActions(0.0f));
@@ -240,10 +237,12 @@ public class Minotaur : MonoBehaviour
         ableToAct = true;
     }
 
-    private void Die()
+    public void Die()
     {
         anim.SetBool("Dead", true);
-        //Win condition
+
+        Vector3 trophyPos = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z);
+        Instantiate(trophy, trophyPos, transform.rotation);
         Destroy(this);
     }
 
@@ -251,5 +250,4 @@ public class Minotaur : MonoBehaviour
     {
         BossActive = true;
     }
-
 }

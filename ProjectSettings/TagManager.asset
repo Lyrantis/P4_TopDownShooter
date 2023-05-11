@@ -10,6 +10,8 @@ TagManager:
   - EnemyProjectile
   - Projectile
   - Water
+  - UI
+  - OptionsHUD
   layers:
   - Default
   - TransparentFX

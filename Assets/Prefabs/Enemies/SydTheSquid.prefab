@@ -247,8 +247,11 @@ MonoBehaviour:
   maxHealth: 100
   healthBarFill: {fileID: 7899118314503338584}
   healthBarBackground: {fileID: 2915238897519423134}
-  CommonDrops: []
-  RareDrops: []
+  CommonDrops:
+  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
+  - {fileID: 2307498189652113325, guid: 8afe8dab38db5754f8826548eddc5d39, type: 3}
+  RareDrops:
+  - {fileID: 1383070983853302724, guid: 0d6d8b598d563b6449a5859ba7b2f33a, type: 3}
   hasHealthBar: 1
   effectTime: 5
 --- !u!1 &6610717989083458151

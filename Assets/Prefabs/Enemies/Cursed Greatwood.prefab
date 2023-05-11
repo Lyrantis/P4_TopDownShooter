@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 14928825}
   - component: {fileID: 14928827}
   - component: {fileID: 14928826}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 391054067}
   - component: {fileID: 391054069}
   - component: {fileID: 391054068}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 784151613}
   - component: {fileID: 784151612}
   - component: {fileID: 784151611}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2085669524}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BatSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,9 +299,10 @@ GameObject:
   - component: {fileID: 4504786824856173754}
   - component: {fileID: 914275172358721959}
   - component: {fileID: 368412622}
-  m_Layer: 0
+  - component: {fileID: 4271602059668512986}
+  m_Layer: 7
   m_Name: Cursed Greatwood
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,7 +322,7 @@ Transform:
   - {fileID: 784151610}
   - {fileID: 2085669524}
   m_Father: {fileID: 0}
-  m_RootOrder: 75
+  m_RootOrder: 76
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3152419461144414947
 SpriteRenderer:
@@ -428,7 +429,36 @@ MonoBehaviour:
   maxHealth: 300
   healthBarFill: {fileID: 14928826}
   healthBarBackground: {fileID: 391054068}
-  CommonDrops: []
+  CommonDrops:
+  - {fileID: 2307498189652113325, guid: fea84552c53f1e14498845fae7ea3194, type: 3}
+  - {fileID: 2307498189652113325, guid: 8afe8dab38db5754f8826548eddc5d39, type: 3}
+  - {fileID: 1383070983853302724, guid: 0d6d8b598d563b6449a5859ba7b2f33a, type: 3}
   RareDrops: []
   hasHealthBar: 1
   effectTime: 5
+--- !u!61 &4271602059668512986
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3703591252264302475}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.056387424, y: -0.23881716}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.69, y: 1.74}
+    newSize: {x: 1.69, y: 1.74}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8342383, y: 1.2623657}
+  m_EdgeRadius: 0

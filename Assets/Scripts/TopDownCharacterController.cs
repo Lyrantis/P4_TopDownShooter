@@ -10,6 +10,8 @@ public class TopDownCharacterController : MonoBehaviour
 
     //Reference to attached animator
     private Animator animator;
+
+    public LevelManager levelManager;
  
     //Reference to attached rigidbody 2D
     private Rigidbody2D rb;
@@ -247,6 +249,16 @@ public class TopDownCharacterController : MonoBehaviour
         {
             GetComponentInChildren<Gun>().StartReload();
         }
+    }
+
+    public void Die()
+    {
+        levelManager.GameOver();
+    }
+
+    public void Win()
+    {
+        levelManager.Win();
     }
 
 }

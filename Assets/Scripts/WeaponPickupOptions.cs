@@ -105,14 +105,21 @@ public class WeaponPickupOptions : MonoBehaviour
     public void PickOption1()
     {
         player.GetComponentInChildren<Gun>().PickupUpgrade(option1);
-        gameObject.SetActive(false);
+
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            gameObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
         player.GetComponent<TopDownCharacterController>().enabled = true;
     }
 
     public void PickOption2()
     {
         player.GetComponentInChildren<Gun>().PickupUpgrade(option2);
-        gameObject.SetActive(false);
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            gameObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
         player.GetComponent<TopDownCharacterController>().enabled = true;
     }
 }

@@ -47,12 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a04369403f30284eaa230d3ccf7101f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 5
   speed: 25
   range: 15
   direction: {x: 1, y: 0}
   explosive: 0
   explosionRadius: 0
+  effect: 0
 --- !u!212 &6159660511454131442
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class Tree : MonoBehaviour
         {
             float distanceToPlayer = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).magnitude;
 
-            if (distanceToPlayer <= aggroDistance)
+            if (distanceToPlayer <= aggroDistance || GetComponent<HealthComponent>().GetHealth() < GetComponent<HealthComponent>().maxHealth)
             {
                 active = true;
             }
@@ -70,7 +70,7 @@ public class Tree : MonoBehaviour
         {
             GameObject b = Instantiate(bat, batSpawnPoint.transform);
             b.transform.parent = null;
-            b.transform.localScale = new Vector3(1, 1, 1);
+            b.transform.localScale = new Vector3(2, 2, 2);
         }
         StartCoroutine(SpawnCooldown());
     }
